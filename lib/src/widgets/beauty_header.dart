@@ -3,20 +3,48 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconHeader extends StatelessWidget {
 
+  final IconData icon;
+  final String titulo;
+  final String subtitulo;
+  final Color color1;
+  final Color color2;
+
+  const IconHeader({
+    required this.icon,
+    required this.titulo,
+    required this.subtitulo,
+    this.color1 = const Color(0xff526bf6),
+    this.color2 = const Color(0xff67acf2)});
+
   @override
   Widget build(BuildContext context) {
+    final Color colorBlanco = Colors.white.withOpacity(0.7);
     return Stack(children:[
-      _IconHeaderBackground(),
+      _IconHeaderBackground(color1:this.color1,color2: this.color2,),
       Positioned(
         top: -50,
         left: -70,
-        child: FaIcon(FontAwesomeIcons.plus, size: 250, color: Colors.white.withOpacity(0.2),)
+        child: FaIcon(icon, size: 250, color: Colors.white.withOpacity(0.2),)
       ),
+      Column(
+        children: [
+          SizedBox(height: 80, width: double.infinity,),
+          Text(titulo, style: TextStyle(fontSize: 20, color: colorBlanco),),
+          SizedBox(height: 20),
+          Text(subtitulo, style: TextStyle(fontSize: 25, color: colorBlanco, fontWeight: FontWeight.bold),),
+          SizedBox(height: 20),
+          FaIcon(icon, size: 80, color: Colors.white,)
+        ],
+      )
     ] );
   }
 }
 
 class _IconHeaderBackground extends StatelessWidget {
+  final Color color1;
+  final Color color2;
+
+  const _IconHeaderBackground({required this.color1, required this.color2});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +58,8 @@ class _IconHeaderBackground extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xff526bf6),
-            Color(0xff67acf2),
+            color1,
+            color2,
           ]
         )
       )
