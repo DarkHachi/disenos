@@ -1,5 +1,7 @@
+import 'package:disenos/src/theme/theme.dart';
 import 'package:disenos/src/widgets/radial_progress_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GraficasCircularesPage extends StatefulWidget {
   @override
@@ -35,7 +37,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
                 colorFondo: Colors.purple,
               ),
               CustomRadialProgress(
-                porcentaje: porcentaje,
+                porcentaje: porcentaje*1.2,
                 colorPrimario: Colors.purple,
                 colorSecundario: Colors.teal,
                 colorFondo: Colors.pink,
@@ -46,13 +48,13 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomRadialProgress(
-                porcentaje: porcentaje,
+                porcentaje: porcentaje*1.4,
                 colorPrimario: Colors.pink,
                 colorSecundario: Colors.blue,
                 colorFondo: Colors.teal,
               ),
               CustomRadialProgress(
-                  porcentaje: porcentaje,
+                  porcentaje: porcentaje*1.6,
                   colorPrimario: Colors.purple,
                   colorSecundario: Colors.pink,
                   colorFondo: Colors.blue)
@@ -79,13 +81,14 @@ class CustomRadialProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     return Container(
       width: 150,
       height: 150,
       child: RadialProgress(
         porcentaje: porcentaje,
         colorPrimario: this.colorPrimario,
-        colorSecundario: this.colorSecundario,
+        colorSecundario: appTheme.textTheme.bodyText1!.color??Colors.grey,
         colorFondo: this.colorFondo,
         grosorPrimario: 10,
         grosorSecundario: 4,
